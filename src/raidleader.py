@@ -1,5 +1,5 @@
 import pygame, sys
-from characters import raider, unit
+from units import raider, unit
 
 def main():
     pygame.init()

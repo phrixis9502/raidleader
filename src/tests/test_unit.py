@@ -1,5 +1,5 @@
 import pytest
-from characters import unit
+from units import unit
 
 
 @pytest.fixture

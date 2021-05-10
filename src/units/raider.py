@@ -1,5 +1,5 @@
 import pygame
-from characters import unit
+from units import unit
 
 class Raider(unit.Unit):
     """docstring for ."""
