@@ -14,6 +14,8 @@ def main():
 
     solo = raider.Raider()
 
+    pause = False
+
     while True:
         # Cycles through all events occuring
         for event in pygame.event.get():
@@ -24,9 +26,14 @@ def main():
             elif event.type == pygame.MOUSEBUTTONDOWN:
                 if event.button == 1:
                     solo.set_destination(event.pos)
+            elif event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_p:
+                    pause = not pause
 
-        #Tick Code
-        solo.move()
+        # Update Game State
+        if not pause:
+            solo.move()
+
         #Render
         DisplaySurface.fill((255,255,255))
         solo.render(DisplaySurface)
