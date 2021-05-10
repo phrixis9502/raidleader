@@ -1,5 +1,5 @@
 import pygame, sys
-from characters import raider
+from characters import raider, unit
 
 def main():
     pygame.init()
@@ -23,13 +23,12 @@ def main():
             #Handle Input
             elif event.type == pygame.MOUSEBUTTONDOWN:
                 if event.button == 1:
-                    mouse_x, mouse_y = event.pos
-                    solo.set_destination(mouse_x, mouse_y)
+                    solo.set_destination(event.pos)
 
         #Tick Code
         solo.move()
         #Render
-        #add black background each tick
+        DisplaySurface.fill((255,255,255))
         solo.render(DisplaySurface)
 
         pygame.display.update()
