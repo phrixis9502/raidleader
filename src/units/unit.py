@@ -1,6 +1,6 @@
 import pygame
 import numpy as np
-from config import color
+from config import colors
 
 class Unit():
     """docstring for ."""
@@ -26,7 +26,7 @@ class Unit():
                 self.x_pos = self.x_pos - (dx * ratio)
                 self.y_pos = self.y_pos - (dy * ratio)
             return True
-        else
+        else:
             return False
 
     def set_destination(self, coords):
@@ -35,5 +35,8 @@ class Unit():
     def clear_destination(self):
         self.dest = []
 
-    def render(self, DisplaySurface):
-        pygame.draw.circle(DisplaySurface, self.color, (self.x_pos, self.y_pos), self.size)
+    def render(self, display_surface):
+        pygame.draw.circle(display_surface, self.color, (self.x_pos, self.y_pos), self.size)
+
+    def render_highlights():
+        pygame.draw.circle(display_surface, colors.yellow, (self.x_pos, self.y_pos), self.size / 2)

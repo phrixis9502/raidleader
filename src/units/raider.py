@@ -7,7 +7,7 @@ class Raider(unit.Unit):
         super().__init__(x_pos, y_pos)
         self.size = 10
 
-    def tick():
+    def tick(self):
         if(self.move()):
             # movement code here
             return

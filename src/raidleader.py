@@ -1,5 +1,5 @@
 import pygame, sys
-from units import inquisitor
+from units import inquisitor, boss
 from encounters import raid, encounter
 
 
@@ -7,7 +7,7 @@ def create_raiding_party():
     raiders = []
 
     for i in range(5):
-        raiders.append(inquisitor.Inquisitor(( i * 20 ) + 20 , 20)))
+        raiders.append(inquisitor.Inquisitor(( i * 20 ) + 20 , 20))
 
     raiding_party = raid.Raid(raiders)
 
@@ -15,7 +15,10 @@ def create_raiding_party():
 
 
 def create_encounter():
-    return
+    raiding_party = create_raiding_party()
+    boss_list = [boss.Boss(300, 300)]
+    return encounter.Encounter(raiding_party, boss_list, [])
+
 
 
 def main():
@@ -29,9 +32,10 @@ def main():
                                    600))
     pygame.display.set_caption("Welcome to Hell")
 
-    raiding_party = create_raiding_party()
+    current_encounter = create_encounter()
 
     pause = False
+    multi_select = False
     selected = []
 
     while True:
@@ -43,18 +47,30 @@ def main():
             #Handle Input
             elif event.type == pygame.MOUSEBUTTONDOWN:
                 if event.button == 1:
-                    solo.set_destination(event.pos)
+                    # if event.pos collides with any raider sprite
+                        #add to selected
+                    # else this v
+                    for raider in selected:
+                        raider.set_destination(event.pos)
             elif event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_p:
                     pause = not pause
+                if (event.key == pygame.K_RSHIFT) OR (event.key == pygame.K_RSHIFT):
+                    multi_select = True
+            elif event.type == pygame.KEYUP:
+                if (event.key == pygame.K_RSHIFT) OR (event.key == pygame.K_RSHIFT):
+                    multi_select = False
 
         # Update Game State
         if not pause:
-            solo.move()
+            current_encounter.tick()
 
         #Render
         DisplaySurface.fill((255,255,255))
-        solo.render(DisplaySurface)
+        current_encounter.render(DisplaySurface)
+
+        for item in selected:
+            item.render_highlights()
 
         pygame.display.update()
         GameClock.tick(FPS)

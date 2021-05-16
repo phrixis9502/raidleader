@@ -9,7 +9,7 @@ class Encounter():
         self.adds = adds
 
     def tick(self):
-        raid.tick()
+        self.raid.tick()
         for boss in self.bosses:
             boss.move()
         for add in self.adds:
@@ -21,5 +21,4 @@ class Encounter():
             boss.render(display_surface)
         for add in self.adds:
             add.render(display_surface)
-        for raider in self.raid:
-            raider.render(display_surface)
+        self.raid.render(display_surface)
