@@ -1,5 +1,22 @@
 import pygame, sys
-from units import raider, unit
+from units import inquisitor
+from encounters import raid, encounter
+
+
+def create_raiding_party():
+    raiders = []
+
+    for i in range(5):
+        raiders.append(inquisitor.Inquisitor(( i * 20 ) + 20 , 20)))
+
+    raiding_party = raid.Raid(raiders)
+
+    return raiding_party
+
+
+def create_encounter():
+    return
+
 
 def main():
     pygame.init()
@@ -12,9 +29,10 @@ def main():
                                    600))
     pygame.display.set_caption("Welcome to Hell")
 
-    solo = raider.Raider()
+    raiding_party = create_raiding_party()
 
     pause = False
+    selected = []
 
     while True:
         # Cycles through all events occuring

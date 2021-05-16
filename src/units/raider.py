@@ -3,8 +3,14 @@ from units import unit
 
 class Raider(unit.Unit):
     """docstring for ."""
-    def __init__(self):
-        super().__init__()
+    def __init__(self, x_pos, y_pos):
+        super().__init__(x_pos, y_pos)
         self.size = 10
-        self.x_pos = 100
-        self.y_pos = 100
+
+    def tick():
+        if(self.move()):
+            # movement code here
+            return
+        else:
+            #code for not moving
+            return
