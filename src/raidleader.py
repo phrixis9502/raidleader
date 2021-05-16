@@ -1,6 +1,7 @@
 import pygame, sys
 from units import inquisitor, boss
 from encounters import raid, encounter
+from config import colors
 
 
 def create_raiding_party():
@@ -55,10 +56,10 @@ def main():
             elif event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_p:
                     pause = not pause
-                if (event.key == pygame.K_RSHIFT) OR (event.key == pygame.K_RSHIFT):
+                if (event.key == pygame.K_RSHIFT) | (event.key == pygame.K_RSHIFT):
                     multi_select = True
             elif event.type == pygame.KEYUP:
-                if (event.key == pygame.K_RSHIFT) OR (event.key == pygame.K_RSHIFT):
+                if (event.key == pygame.K_RSHIFT) | (event.key == pygame.K_RSHIFT):
                     multi_select = False
 
         # Update Game State
@@ -66,7 +67,7 @@ def main():
             current_encounter.tick()
 
         #Render
-        DisplaySurface.fill((255,255,255))
+        DisplaySurface.fill(colors.Black)
         current_encounter.render(DisplaySurface)
 
         for item in selected:
