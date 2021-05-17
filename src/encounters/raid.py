@@ -13,3 +13,10 @@ class Raid():
     def render(self, display_surface):
         for raider in self.raiders:
             raider.render(display_surface)
+
+    def click(self, position):
+        selected = []
+        for raider in self.raiders:
+            if raider.check_distance(position):
+                selected.append(raider)
+        return selected

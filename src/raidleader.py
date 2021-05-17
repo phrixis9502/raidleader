@@ -48,18 +48,27 @@ def main():
             #Handle Input
             elif event.type == pygame.MOUSEBUTTONDOWN:
                 if event.button == 1:
-                    # if event.pos collides with any raider sprite
-                        #add to selected
-                    # else this v
-                    for raider in selected:
-                        raider.set_destination(event.pos)
+                    clicked = current_encounter.click(event.pos)
+                    if len(clicked) > 0:
+                        print(multi_select)
+                        if multi_select:
+                            selected += clicked
+                        else:
+                            selected = []
+                            selected.append(clicked[0])
+                    else:
+                        for raider in selected:
+                            raider.set_destination(event.pos)
+
+                elif event.button == 3:
+                    selected = []
             elif event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_p:
                     pause = not pause
-                if (event.key == pygame.K_RSHIFT) | (event.key == pygame.K_RSHIFT):
+                if (event.key == pygame.K_LSHIFT) or (event.key == pygame.K_RSHIFT):
                     multi_select = True
             elif event.type == pygame.KEYUP:
-                if (event.key == pygame.K_RSHIFT) | (event.key == pygame.K_RSHIFT):
+                if (event.key == pygame.K_LSHIFT) or (event.key == pygame.K_RSHIFT):
                     multi_select = False
 
         # Update Game State
@@ -71,7 +80,7 @@ def main():
         current_encounter.render(DisplaySurface)
 
         for item in selected:
-            item.render_highlights()
+            item.render_highlights(DisplaySurface)
 
         pygame.display.update()
         GameClock.tick(FPS)

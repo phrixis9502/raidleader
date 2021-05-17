@@ -22,3 +22,13 @@ class Encounter():
         for add in self.adds:
             add.render(display_surface)
         self.raid.render(display_surface)
+
+    def click(self, position):
+        selected = self.raid.click(position)
+        for boss in self.bosses:
+            if boss.check_distance(position):
+                selected.append(boss)
+        for add in self.adds:
+            if add.check_distance(position):
+                selected.append(add)
+        return selected

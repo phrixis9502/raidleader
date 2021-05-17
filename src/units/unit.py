@@ -5,12 +5,22 @@ from config import colors
 class Unit():
     """docstring for ."""
     def __init__(self, x_pos, y_pos):
+        #super().__init__(self)
         self.x_pos = x_pos
         self.y_pos = y_pos
         self.dest = []
         # move_speed - Set in subclass
         # color - Set in subclass
         # hit_points - Set in subclass
+
+        # Create an image of the block, and fill it with a color.
+       # This could also be an image loaded from the disk.
+       #self.image = pygame.Surface([width, height])
+       #self.image.fill(color)
+
+       # Fetch the rectangle object that has the dimensions of the image
+       # Update the position of this object by setting the values of rect.x and rect.y
+       #self.rect = self.image.get_rect()
 
     def move(self):
         if len(self.dest) != 0:
@@ -38,5 +48,11 @@ class Unit():
     def render(self, display_surface):
         pygame.draw.circle(display_surface, self.color, (self.x_pos, self.y_pos), self.size)
 
-    def render_highlights():
-        pygame.draw.circle(display_surface, colors.yellow, (self.x_pos, self.y_pos), self.size / 2)
+    def render_highlights(self, display_surface):
+        pygame.draw.circle(display_surface, colors.Yellow, (self.x_pos, self.y_pos), self.size / 2)
+
+    def check_distance(self, position, range = 0):
+        if range == 0:
+            range = self.size
+        distance = np.sqrt(np.power(self.x_pos - position[0], 2) + np.power(self.y_pos - position[1], 2))
+        return range >= distance
