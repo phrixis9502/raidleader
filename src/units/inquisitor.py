@@ -10,4 +10,4 @@ class Inquisitor(raider.Raider):
         self.image = pygame.Surface([self.size, self.size])
         self.image.fill(self.color)
         self.rect = self.image.get_rect()
-        self.move_speed = 20
+        self.move_speed = 5
